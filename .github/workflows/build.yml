@@ -93,14 +93,14 @@ jobs:
           npm run tauri build
 
       - name: Upload for Mac App
-        if: matrix.os == 'ubuntu-20.04'
+        if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v1
         with:
           name: mac-build
           path: ./tauri-app-test-ci-cd/src-tauri/target/release/bundle/macos/testtauri.app
 
       - name: Upload for Mac Dmg
-        if: matrix.os == 'ubuntu-20.04'
+        if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v1
         with:
           name: mac-build
@@ -113,6 +113,7 @@ jobs:
           npm run tauri build
 
       - name: Upload for Windows
+        if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v1
         with:
           name: windows-build
