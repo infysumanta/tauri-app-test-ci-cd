@@ -32,10 +32,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: install node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
@@ -97,14 +97,14 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: mac-build
-          path: ./tauri-app-test-ci-cd/src-tauri/target/release/bundle/macos/testtauri.app
+          path: ./src-tauri/target/release/bundle/macos/testtauri.app
 
       - name: Upload for Mac Dmg
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v1
         with:
           name: mac-build
-          path: ./tauri-app-test-ci-cd/src-tauri/target/release/bundle/dmg/testtauri_0.0.1_x64.dmg
+          path: ./src-tauri/target/release/bundle/dmg/testtauri_0.0.1_x64.dmg
 
       - name: Build for Windows
         if: matrix.os == 'windows-latest'
