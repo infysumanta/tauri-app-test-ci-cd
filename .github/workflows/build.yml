@@ -68,18 +68,52 @@ jobs:
             src-tauri/target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: build for Ubuntu
+      - name: Build for Ubuntu
         if: matrix.os == 'ubuntu-20.04'
         run: npm run tauri build
 
-      - name: build for MacOS
+      - name: Upload for Ubuntu Deb
+        if: matrix.os == 'ubuntu-20.04'
+        uses: actions/upload-artifact@v1
+        with:
+          name: ubuntu-build-dev
+          path: ./src-tauri/target/release/bundle/deb/testtauri_0.0.1_amd64.deb
+
+      - name: Upload for Ubuntu AppImage
+        if: matrix.os == 'ubuntu-20.04'
+        uses: actions/upload-artifact@v1
+        with:
+          name: ubuntu-build-dev
+          path: ./src-tauri/target/release/bundle/appimage/testtauri_0.0.1_amd64.AppImage
+
+      - name: Build for MacOS
         if: matrix.os == 'macos-latest'
         run: |
           rustup target add aarch64-apple-darwin
           npm run tauri build
 
-      - name: build for windows
+      - name: Upload for Mac App
+        if: matrix.os == 'ubuntu-20.04'
+        uses: actions/upload-artifact@v1
+        with:
+          name: mac-build
+          path: ./tauri-app-test-ci-cd/src-tauri/target/release/bundle/macos/testtauri.app
+
+      - name: Upload for Mac Dmg
+        if: matrix.os == 'ubuntu-20.04'
+        uses: actions/upload-artifact@v1
+        with:
+          name: mac-build
+          path: ./tauri-app-test-ci-cd/src-tauri/target/release/bundle/dmg/testtauri_0.0.1_x64.dmg
+
+      - name: Build for Windows
         if: matrix.os == 'windows-latest'
         shell: pwsh
         run: |
           npm run tauri build
+
+      - name: Upload for Windows
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows-build
+          path: ./src-tauri/target/release/bundle/msi/testtauri_0.0.1_x64_en-US.msi
