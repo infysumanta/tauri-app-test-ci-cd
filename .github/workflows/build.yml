@@ -76,14 +76,14 @@ jobs:
         if: matrix.os == 'ubuntu-20.04'
         uses: actions/upload-artifact@v1
         with:
-          name: ubuntu-build-dev
+          name: ubuntu-build-deb
           path: ./src-tauri/target/release/bundle/deb/testtauri_0.0.1_amd64.deb
 
       - name: Upload for Ubuntu AppImage
         if: matrix.os == 'ubuntu-20.04'
         uses: actions/upload-artifact@v1
         with:
-          name: ubuntu-build-dev
+          name: ubuntu-build-appimage
           path: ./src-tauri/target/release/bundle/appimage/testtauri_0.0.1_amd64.AppImage
 
       - name: Build for MacOS
@@ -96,14 +96,14 @@ jobs:
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v1
         with:
-          name: mac-build
+          name: mac-build-app
           path: ./src-tauri/target/release/bundle/macos/testtauri.app
 
       - name: Upload for Mac Dmg
         if: matrix.os == 'macos-latest'
         uses: actions/upload-artifact@v1
         with:
-          name: mac-build
+          name: mac-build-dmg
           path: ./src-tauri/target/release/bundle/dmg/testtauri_0.0.1_x64.dmg
 
       - name: Build for Windows
